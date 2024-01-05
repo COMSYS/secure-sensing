@@ -1,0 +1,14 @@
+dep/
+*.pyc
+*~
+*.swp
+timings.json
+
+quorum/sc/build/
+abe_authority/config/
+client/config/
+storage/config/
+node_modules/
+
+.vagrant/
+.vagrant-manual/

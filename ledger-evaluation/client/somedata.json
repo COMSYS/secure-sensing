@@ -1,0 +1,18 @@
+{
+    "key1": "value1",
+    "obj1": {
+        "this": "object",
+        "has2": "properties",
+	"and": {
+		"a": "subobject",
+		"with": "properties"
+	}
+    },
+    "arr1": [
+        "val1",
+        "val2",
+        {
+            "obj in": "array"
+        }
+    ]
+}

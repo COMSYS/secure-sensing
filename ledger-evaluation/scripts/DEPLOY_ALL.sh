@@ -1,0 +1,1 @@
+python3.7 scripts/deploy.py --reset --clearconfig --quorumdir /home/vagrant/eth/nodes --quorumnodes 4 --smartcontract /home/vagrant/blockchain-supply/quorum/sc/  --baseurl "http://securesensing.comsys.rwth-aachen.de/"

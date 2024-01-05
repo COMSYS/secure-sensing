@@ -1,0 +1,64 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+Vagrant.configure("2") do |config|
+  config.vm.box = "debian/buster64"
+
+  config.vm.network "private_network", ip: "192.168.56.10"
+
+  # Create a public network, which generally matched to bridged network.
+  # Bridged networks make the machine appear as another physical device on
+  # your network.
+  # config.vm.network "public_network"
+
+  # Share an additional folder to the guest VM. The first argument is
+  # the path on the host to the actual folder. The second argument is
+  # the path on the guest to mount the folder. And the optional third
+  # argument is a set of non-required options.
+  # config.vm.synced_folder "../data", "/vagrant_data"
+
+  # Provider-specific configuration so you can fine-tune various
+  # backing providers for Vagrant. These expose provider-specific options.
+  # Example for VirtualBox:
+  #
+  config.vm.provider "virtualbox" do |vb|
+  #   # Display the VirtualBox GUI when booting the machine
+  #   vb.gui = true
+  #
+  #   # Customize the amount of memory on the VM:
+     vb.memory = "4096"
+
+     vb.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
+     vb.customize ["modifyvm", :id, "--natdnshostresolver2", "on"]
+     vb.customize ["modifyvm", :id, "--natdnsproxy1", "on"]
+     vb.customize ["modifyvm", :id, "--natdnsproxy2", "on"]
+     vb.customize ["modifyvm", :id, "--nictype1", "Am79C973"]
+     vb.customize ["modifyvm", :id, "--nictype2", "Am79C973"]
+  end
+  #
+  # View the documentation for the provider you are using for more
+  # information on available options.
+
+  # Enable provisioning with a shell script. Additional provisioners such as
+  # Puppet, Chef, Ansible, Salt, and Docker are also available. Please see the
+  # documentation for more information about their specific syntax and use.
+  config.ssh.forward_agent = true
+
+  # Copy the files (no sync!) -- trailing slash results in a subdirectory not being created
+  config.vm.provision "file", source: ".", destination: "/home/vagrant/blockchain-supply/"
+
+  config.vm.provision "setup", type: "shell", keep_color: true, path: "vagrant/setup.sh", privileged: false, run: "never"
+  config.vm.provision "s_all", type: "shell", keep_color: true, path: "vagrant/setup_all.sh", privileged: false, run: "never"
+  config.vm.provision "s_init", type: "shell", keep_color: true, path: "vagrant/setup_init.sh", run: "never", privileged: false
+
+  config.vm.provision "init", type: "shell", keep_color: true, path: "vagrant/setup_init.sh", privileged: false, run: "once"
+  config.vm.provision "clone", type: "shell", keep_color: true, path: "vagrant/clone.sh", privileged: false, run: "once"
+  config.vm.provision "s_python", type: "shell", keep_color: true, path: "vagrant/setup_python.sh", run: "once", privileged: false
+  config.vm.provision "s_mongo", type: "shell", keep_color: true, path: "vagrant/setup_mongo.sh", run: "once", privileged: false
+  config.vm.provision "s_apache", type: "shell", keep_color: true, path: "vagrant/setup_apache.sh", run: "once", privileged: false
+  config.vm.provision "s_quorum", type: "shell", keep_color: true, path: "vagrant/setup_quorum.sh", run: "once", privileged: false
+  config.vm.provision "s_truffle", type: "shell", keep_color: true, path: "vagrant/setup_truffle.sh", run: "once", privileged: false
+  config.vm.provision "s_pylibs", type: "shell", keep_color: true, path: "vagrant/setup_pylibs.sh", run: "once", privileged: false
+  config.vm.provision "s_patch", type: "shell", keep_color: true, path: "vagrant/patch_files.sh", run: "once", privileged: false
+  config.vm.provision "deploy", type: "shell", keep_color: true, path: "vagrant/deploy.sh", run: "once", privileged: false
+end

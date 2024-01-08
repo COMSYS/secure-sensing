@@ -1,0 +1,26 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+authors:
+- family-names: "Pennekamp"
+  given-names: "Jan"
+  orcid: "https://orcid.org/0000-0003-0398-6904"
+- family-names: "Alder"
+  given-names: "Fritz"
+  orcid: "https://orcid.org/0000-0001-9607-7798"
+- family-names: "Bader"
+  given-names: "Lennart"
+  orcid: "https://orcid.org/0000-0001-8549-1344"
+- family-names: "Scopelliti"
+  given-names: "Gianluca"
+  orcid: "https://orcid.org/0000-0003-3712-0658"
+- family-names: "Wehrle"
+  given-names: "Klaus"
+  orcid: "https://orcid.org/0000-0001-7252-4186"
+- family-names: "Mühlberg"
+  given-names: "Jan Tobias"
+  orcid: "https://orcid.org/000-0001-5035-0576"
+title: "Securing Sensing in Supply Chains: Opportunities, Building Blocks, and Designs"
+version: 1.0.0
+doi: 10.1109/ACCESS.2024.3350778
+date-released: 2024-01-05
+url: "https://github.com/COMSYS/secure-sensing"
